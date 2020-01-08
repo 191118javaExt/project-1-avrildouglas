@@ -1,0 +1,11 @@
+package com.revature.repositories;
+
+public interface ReimTypeDAO {
+
+	public List<ReimType> findAll();
+	public ReimType findById(int type_id);
+	public boolean insert(ReimType t);
+	public boolean update(ReimType t);
+			
+		}
+}

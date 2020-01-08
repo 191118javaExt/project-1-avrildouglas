@@ -1,0 +1,11 @@
+package com.revature.repositories;
+
+import java.util.List;
+
+public interface Employee {
+	public List<Employee> findAll();
+	public Employee findById(int id);
+	public boolean insert(Employee e);
+	public boolean update(Employee e);
+	
+}

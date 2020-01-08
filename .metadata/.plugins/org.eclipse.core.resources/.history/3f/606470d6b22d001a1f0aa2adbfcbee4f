@@ -1,0 +1,12 @@
+package com.revature.models;
+
+public class Role {
+	
+	private int role_id;
+	private int emp_id;
+	private 
+	
+	
+	
+
+}

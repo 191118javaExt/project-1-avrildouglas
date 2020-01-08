@@ -1,0 +1,87 @@
+package com.revature.repositories;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.revature.models.Role;
+import com.revature.util.ConnectionUtil;
+
+public class RoleDAOImpl implements RoleDAO {
+	private static Logger logger = LogManager.getLogger(RoleDAOImpl.class);
+	
+	
+	@Override
+		public List<Role> findAll() {
+			
+			List<Role> list = new ArrayList<>();
+			
+			try (Connection conn = ConnectionUtil.getConnection()) {
+
+				String sql = "SELECT * FROM reimbursedb.role;";
+
+				Statement stmt = conn.createStatement();
+				
+				ResultSet rs = stmt.executeQuery(sql);
+		
+				while(rs.next()) {
+					int role_id = rs.getInt("role_id");
+					int emp_id = rs.getInt("emp_id");
+					String role_name = rs.getString("role_name");
+					String role_desc = rs.getString("role_desc");
+							
+					Role l = new Role(role_id, emp_id, role_name, role_desc);
+						
+					list.add(l);
+				}
+				
+				rs.close();
+			} catch(SQLException e) {
+				logger.warn("Unable to retrieve all roles", e);
+			}
+			return list;
+		}
+
+		@Override
+		public Role findById(int role_id) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public boolean insert(Role l) {
+			try (Connection conn = ConnectionUtil.getConnection()) {
+		
+				String sql = "INSERT INTO reimbursedb.role(emp_id, role_name, role_desc) " +
+						"VALUES (?, ?, ?);";
+
+				PreparedStatement stmt = conn.prepareStatement(sql);
+				stmt.setInt(1, l.getEmp_id());
+				stmt.setString(2, l.getRole_name());
+				stmt.setString(3, l.getRole_desc());
+					
+				if(!stmt.execute()) {
+					return false;
+				}
+			} catch(SQLException ex) {
+				logger.warn("Unable to retrieve all roles", ex);
+				return false;
+			}
+			
+			return true;
+		}
+
+		@Override
+		public boolean update(Role l) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+}

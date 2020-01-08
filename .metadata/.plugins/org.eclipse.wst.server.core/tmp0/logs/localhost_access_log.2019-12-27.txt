@@ -1,0 +1,2 @@
+127.0.0.1 - - [27/Dec/2019:09:17:01 -0500] "GET / HTTP/1.1" 404 709
+0:0:0:0:0:0:0:1 - - [27/Dec/2019:09:17:02 -0500] "GET /project-1/WEB-INF/classes/com/revature/Driver.java HTTP/1.1" 404 682

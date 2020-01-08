@@ -1,0 +1,108 @@
+package com.revature.repositories;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.revature.models.Reimburse;
+import com.revature.util.ConnectionUtil;
+
+public class ReimburseDAOImpl implements ReimburseDAO {
+	
+	private static Logger logger = LogManager.getLogger(ReimburseDAOImpl.class);
+	
+	
+@Override
+	public List<Reimburse> findAll() {
+		
+		List<Reimburse> list = new ArrayList<>();
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+
+			String sql = "SELECT * FROM reimbursedb.reimburse;";
+
+			Statement stmt = conn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery(sql);
+	
+			while(rs.next()) {
+				int reim_id = rs.getInt("reim_id");
+				String submit_by = rs.getString("submit_by");
+				Double reim_amt = rs.getDouble("reim_amt");
+				String reim_type = rs.getString("reim_type");
+				String reim_descr = rs.getString("reim_descr");
+				LocalDate submit_dte = rs.getDate("submit_dte").toLocalDate();
+				String reim_recpt = rs.getString("reim_recpt");
+				String reim_stat = rs.getString("reim_stat");
+				LocalDate process_dte = rs.getDate("process_dte").toLocalDate();
+				String process_by = rs.getString("process_by");
+				int emp_id = rs.getInt("emp_id");
+				int type_id = rs.getInt("type_id");
+				int status_id = rs.getInt("status_id");
+				
+				Reimburse r = new Reimburse(reim_id, submit_by, reim_amt, reim_type, reim_descr, submit_dte, reim_recpt, reim_stat, process_dte, process_by, emp_id, type_id, status_id);
+					
+				list.add(r);
+			}
+			
+			rs.close();
+		} catch(SQLException e) {
+			logger.warn("Unable to retrieve all reimbursements", e);
+		}
+		return list;
+	}
+
+	@Override
+	public Reimburse findById(int reim_id) {
+		
+		return null;
+	}
+
+	@Override
+	public boolean insert(Reimburse r) {
+		try (Connection conn = ConnectionUtil.getConnection()) {
+	;
+			String sql = "INSERT INTO reimbursedb.reimburse (first_name, last_name, user_name, pass_word, birth_date, gender) " +
+					"VALUES (?, ?, ?, ?, ?, ?);";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, r.getSubmit_by());
+			stmt.setDouble(2, r.getReim_amt());
+			stmt.setString(3, r.getReim_type());
+			stmt.setString(4, r.getReim_descr());
+			stmt.setDate(4, r.getSubmit_dte());
+			stmt.setString(6, r.getReim_recpt());
+			stmt.setString(7, r.getReim_stat());
+			stmt.setDate(8, r.getProcess_dte());
+			//stmt.setDate(7, (java.sql.Date) e.getHire_date());
+			//stmt.setTimestamp(6, (java.sql.Timestamp) e.getHire_date());
+			
+			if(!stmt.execute()) {
+				return false;
+			}
+		} catch(SQLException ex) {
+			logger.warn("Unable to retrieve all employees", ex);
+			return false;
+		}
+		
+		return true;
+	}
+
+	@Override
+	public boolean update(Employee e) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

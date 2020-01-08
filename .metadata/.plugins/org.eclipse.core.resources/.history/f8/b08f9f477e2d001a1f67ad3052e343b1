@@ -1,0 +1,10 @@
+package com.revature.models;
+
+public class Employee {
+
+	private int emp_id;
+	private String first_name;
+	private String last_name;
+	private Date birt_date;
+	
+}

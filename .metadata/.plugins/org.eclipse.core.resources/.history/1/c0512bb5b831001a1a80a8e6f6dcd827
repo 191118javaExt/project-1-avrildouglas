@@ -1,0 +1,16 @@
+package com.revature.repositories;
+
+import java.util.List;
+
+public interface ReimStatusDAO {
+
+	public interface ReimStatusDAO {
+		public List<ReimStatus> findAll();
+		public ReimStatus findById(int status_id);
+		public boolean insert(ReimStatus rs);
+		public boolean update(ReimStatus rs);
+		
+	}
+	
+	
+}

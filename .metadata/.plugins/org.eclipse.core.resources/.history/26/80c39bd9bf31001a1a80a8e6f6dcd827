@@ -1,0 +1,101 @@
+package com.revature.repositories;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.revature.models.Employee;
+import com.revature.util.ConnectionUtil;
+
+
+public class EmployeeDAOImpl implements EmployeeDAO {
+	
+	private static Logger logger = LogManager.getLogger(EmployeeDAOImpl.class);
+	
+	
+@Override
+	public List<Employee> findAll() {
+		
+		List<Employee> list = new ArrayList<>();
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+
+			String sql = "SELECT * FROM reimbursedb.employee;";
+
+			Statement stmt = conn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery(sql);
+	
+			while(rs.next()) {
+				int emp_id = rs.getInt("emp_id");
+				String first_name = rs.getString("first_name");
+				String last_name = rs.getString("last_name");
+				String user_name = rs.getString("user_name");
+				String pass_word = rs.getString("pass_word");
+				Date birth_date = rs.getDate("birth_date");
+				String gender = rs.getString("gender");
+				Date hire_date = rs.getDate("hire_date");
+				
+				Employee e = new Employee(emp_id, first_name, last_name, user_name, pass_word, birth_date, gender, hire_date);
+					
+				list.add(e);
+			}
+			
+			rs.close();
+		} catch(SQLException e) {
+			logger.warn("Unable to retrieve all employees", e);
+		}
+		return list;
+	}
+
+	@Override
+	public Employee findById(int emp_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean insert(Employee e) {
+		try (Connection conn = ConnectionUtil.getConnection()) {
+	;
+			String sql = "INSERT INTO reimbursedb.employee (first_name, last_name, user_name, pass_word, birth_date, gender) " +
+					"VALUES (?, ?, ?, ?, ?, ?);";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, e.getFirst_name());
+			stmt.setString(2, e.getLast_name());
+			stmt.setString(3, e.getUser_name());
+			stmt.setString(4, e.getPass_word());
+			stmt.setDate(5, (java.sql.Date) e.getBirth_date());
+			stmt.setString(6, e.getGender());
+			//stmt.setDate(7, (java.sql.Date) e.getHire_date());
+			//stmt.setTimestamp(6, (java.sql.Timestamp) e.getHire_date());
+			
+			if(!stmt.execute()) {
+				return false;
+			}
+		} catch(SQLException ex) {
+			logger.warn("Unable to retrieve all employees", ex);
+			return false;
+		}
+		
+		return true;
+	}
+
+	@Override
+	public boolean update(Employee e) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

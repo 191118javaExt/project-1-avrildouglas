@@ -1,0 +1,13 @@
+package com.revature.repositories;
+
+import java.util.List;
+
+import com.revature.models.Reimburse;
+
+public interface ReimburseDAO {
+	
+	public List<Reimburse> findAll();
+	public Reimburse findById(int id);
+	public boolean insert(Reimburse r);
+	public boolean update(Reimburse r);
+}
