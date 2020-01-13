@@ -75,27 +75,46 @@ CREATE TABLE reimbursedb.role (
 INSERT INTO reimbursedb.role (emp_id, role_name, role_desc) VALUES (1, 'admin', 'Role can view all dashboard view pages');
 INSERT INTO reimbursedb.role (emp_id, role_name, role_desc) VALUES (3, 'admin', 'Role can view all dashboard view pages');
 INSERT INTO reimbursedb.role (emp_id, role_name, role_desc) VALUES (2, 'admin', 'Role can view all dashboard view pages');
+INSERT INTO reimbursedb.role (emp_id, role_name, role_desc) VALUES (4, 'admin', 'Role can view all dashboard view pages');
 
+DROP TABLE IF EXISTS reimbursedb.reim_recpt CASCADE;
+CREATE TABLE reimbursedb.reim_recpt (
+     recpt_id SERIAL PRIMARY KEY,
+     reim_id INTEGER NOT NULL REFERENCES reimbursedb.reimburse(reim_id),
+     mime_type CHARACTER VARYING(255) NOT NULL,
+     file_name CHARACTER VARYING(255) NOT NULL,
+     file_data BYTEA NOT NULL
+   );
 
-DROP TABLE IF EXISTS reimbursedb.reimburse CASCADE;;
+DROP TABLE IF EXISTS reimbursedb.reimburse CASCADE;
 CREATE TABLE reimbursedb.reimburse (
 	reim_id SERIAL PRIMARY KEY,
+	user_name VARCHAR NOT NULL,
 	submit_by VARCHAR NOT NULL, --f_name + l_name
 	reim_amt NUMERIC(10, 2) NOT NULL,
 	reim_type VARCHAR NOT NULL,
 	reim_descr VARCHAR NOT NULL,
 	submit_dte TIMESTAMP NOT NULL,
-	reim_recpt VARCHAR NOT NULL,
+	reim_recpt VARCHAR,
 	reim_stat VARCHAR NOT NULL,
 	process_dte TIMESTAMP NOT NULL,
-	process_by VARCHAR NOT NULL,
-	emp_id INTEGER REFERENCES reimbursedb.employee(emp_id),
-	type_id INTEGER REFERENCES reimbursedb.reim_type(type_id),
-	status_id INTEGER REFERENCES reimbursedb.reim_status(status_id)
+	process_by VARCHAR NOT NULL
+	
 	
 	--CONSTRAINT  fk_emp_id FOREIGN KEY (emp_id) REFERENCES reimburse.employee(emp_id)
 	
 );
+
+INSERT INTO reimbursedb.reimburse (user_name, submit_by, reim_amt,reim_type,
+reim_descr, submit_dte, reim_recpt, reim_stat, process_dte, process_by)
+VALUES ('mjane3434', 'Mary Jane','200.00', 'Food', 'For Donuts',
+'11/24/2019', '', 'Pending', '11/25/2019','Scott Perry');
+INSERT INTO reimbursedb.reimburse (user_name, submit_by, reim_amt,reim_type,
+reim_descr, submit_dte, reim_recpt, reim_stat, process_dte, process_by)
+VALUES ('wgriffith', 'Wanda Griffith','225.00', 'Lodge', 'Overnight stay in 1 room',
+'12/27/2019', '', 'Approve', '12/29/2019','Scott Perry');
+
+
 
 DROP TABLE IF EXISTS reimbursedb.reim_type CASCADE;
 CREATE TABLE reimbursedb.reim_type (

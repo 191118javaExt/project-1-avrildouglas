@@ -16,6 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.revature.models.Reimburse;
+import com.revature.models.ReimburseTemplate;
 import com.revature.util.ConnectionUtil;
 
 public class ReimburseDAOImpl implements ReimburseDAO {
@@ -47,12 +48,10 @@ public class ReimburseDAOImpl implements ReimburseDAO {
 				String reim_stat = rs.getString("reim_stat");
 				Date process_dte = rs.getDate("process_dte");
 				String process_by = rs.getString("process_by");
-				int emp_id = rs.getInt("emp_id");
-				int type_id = rs.getInt("type_id");
-				int status_id = rs.getInt("status_id");
+				String user_name = rs.getString("user_name");
+			
 				
-				
-				Reimburse r = new Reimburse(reim_id, submit_by, reim_amt, reim_type, reim_descr, submit_dte, reim_recpt, reim_stat, process_dte, process_by, emp_id, type_id, status_id);
+				Reimburse r = new Reimburse(reim_id, submit_by, reim_amt, reim_type, reim_descr, submit_dte, reim_recpt, reim_stat, process_dte, process_by, user_name);
 					
 				list.add(r);
 			}
@@ -64,6 +63,8 @@ public class ReimburseDAOImpl implements ReimburseDAO {
 		return list;
 	}
 
+
+
 	@Override
 	public Reimburse findById(int reim_id) {
 		
@@ -74,8 +75,8 @@ public class ReimburseDAOImpl implements ReimburseDAO {
 	public boolean insert(Reimburse r) {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			
-			String sql = "INSERT INTO reimbursedb.reimburse (submit_by, reim_amt, reim_type, reim_descr, submit_dte, reim_recpt, reim_stat, process_dte, process_by, emp_id, type_id, status_id) " +
-					"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			String sql = "INSERT INTO reimbursedb.reimburse (submit_by, reim_amt, reim_type, reim_descr, submit_dte, reim_recpt, reim_stat, process_dte, process_by, user_name) " +
+					"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, r.getSubmit_by());
@@ -87,9 +88,7 @@ public class ReimburseDAOImpl implements ReimburseDAO {
 			stmt.setString(7, r.getReim_stat());
 			stmt.setDate(8, (java.sql.Date) r.getProcess_dte());
 			stmt.setString(9, r.getProcess_by());
-			stmt.setInt(10,  r.getEmp_id());
-			stmt.setInt(11,  r.getType_id());
-			stmt.setInt(12,  r.getStatus_id());
+			stmt.setString(10,  r.getUser_name());
 			
 			if(!stmt.execute()) {
 				return false;

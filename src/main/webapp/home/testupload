@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>File Upload</title>
+
+</head>
+
+<body>
+
+	<input type="file" id="pdf-file" />
+	<button type="button" id="custom-button"> CHOOSE A FILE</button>
+	<span id="custom-text">No file chosen yet</span>
+
+</body>
+
+
+
+
+
+
+<form action="/action_page.php" method="get">
+
+
+
+
+  First name: <input type="text" name="fname"><br>
+  Last name: <input type="text" name="lname"><br>
+  
+  
+  
+  
+  <input type="submit" value="Submit">
+</form>
+
+<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+<?php
+ 
+require 'vendor/autoload.php';
+ 
+use PostgreSQLTutorial\Connection as Connection;
+use PostgreSQLTutorial\BlobDB as BlobDB;
+ 
+try {
+    // connect to the PostgreSQL database
+    $pdo = Connection::get()->connect();
+    // 
+    $blobDB = new BlobDB($pdo);
+    $fileId = $blobDB->insert(2, 'logo', 'image/png', 'assets/images/google.png');
+ 
+    echo 'A file has been inserted with id ' . $fileId;
+} catch (\PDOException $e) {
+    echo $e->getMessage();
+}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

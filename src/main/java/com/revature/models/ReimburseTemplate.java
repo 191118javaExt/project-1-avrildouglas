@@ -2,10 +2,8 @@ package com.revature.models;
 
 import java.util.Date;
 
-public class Reimburse {
-	
-	private static final long serialVersionUID = 1L;
-	
+public class ReimburseTemplate {
+
 	private int reim_id;
 	private String submit_by;
 	private Double reim_amt;
@@ -17,13 +15,13 @@ public class Reimburse {
 	private Date process_dte;
 	private String process_by;
 	private String user_name;
-	public Reimburse() {
+	
+	public ReimburseTemplate() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Reimburse(int reim_id, String submit_by, Double reim_amt, String reim_type, String reim_descr,
-			Date submit_dte, String reim_recpt, String reim_stat, Date process_dte, String process_by,
-			String user_name) {
+	public ReimburseTemplate(int reim_id, String submit_by, Double reim_amt, String reim_type, String reim_descr,
+			Date submit_dte, String reim_recpt, String reim_stat, Date process_dte, String process_by, String user_name) {
 		super();
 		this.reim_id = reim_id;
 		this.submit_by = submit_by;
@@ -128,7 +126,7 @@ public class Reimburse {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Reimburse other = (Reimburse) obj;
+		ReimburseTemplate other = (ReimburseTemplate) obj;
 		if (process_by == null) {
 			if (other.process_by != null)
 				return false;
@@ -185,11 +183,10 @@ public class Reimburse {
 	}
 	@Override
 	public String toString() {
-		return "Reimburse [reim_id=" + reim_id + ", submit_by=" + submit_by + ", reim_amt=" + reim_amt + ", reim_type="
-				+ reim_type + ", reim_descr=" + reim_descr + ", submit_dte=" + submit_dte + ", reim_recpt=" + reim_recpt
-				+ ", reim_stat=" + reim_stat + ", process_dte=" + process_dte + ", process_by=" + process_by
-				+ ", user_name=" + user_name + "]";
+		return "ReimburseTemplate [reim_id=" + reim_id + ", submit_by=" + submit_by + ", reim_amt=" + reim_amt
+				+ ", reim_type=" + reim_type + ", reim_descr=" + reim_descr + ", submit_dte=" + submit_dte
+				+ ", reim_recpt=" + reim_recpt + ", reim_stat=" + reim_stat + ", process_dte=" + process_dte
+				+ ", process_by=" + process_by + ", user_name=" + user_name + "]";
 	}
 	
-
 }

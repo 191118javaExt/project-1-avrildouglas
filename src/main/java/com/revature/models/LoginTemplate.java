@@ -60,9 +60,6 @@ public class LoginTemplate implements Serializable {
 	public String toString() {
 		return "LoginTemplate [user_name=" + user_name + ", pass_word=" + pass_word + "]";
 	}
-
-
-
 	
 
 	

@@ -20,27 +20,27 @@ public class EmployeeServlet extends HttpServlet {
 	private static ObjectMapper om = new ObjectMapper();
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res)
-		throws ServletException, IOException {
-		res.setContentType("application/json");
-		List<Employee> all = EmployeeService.findAll();
-		List<EmployeeDTO> allDTO = new ArrayList<>();
-		
-		for(Employee e : all) {
-			allDTO.add(new EmployeeDTO(e.getEmp_id(),
-					e.getFirst_name(),
-					e.getLast_name(),
-					e.getUser_name(),
-					e.getPass_word(),
-					e.getBirth_date(),
-					e.getGender(),
-					e.getHire_date().toString()));
+			throws ServletException, IOException {
+			res.setContentType("application/json");
+			List<Employee> all = EmployeeService.findAll();
+			List<EmployeeDTO> allDTO = new ArrayList<>();
+			
+			for(Employee e : all) {
+				allDTO.add(new EmployeeDTO(e.getEmp_id(),
+						e.getFirst_name(),
+						e.getLast_name(),
+						e.getUser_name(),
+						e.getPass_word(),
+						e.getBirth_date(),
+						e.getGender(),
+						e.getHire_date().toString()));
+			}
+			
+			
+			String json = om.writeValueAsString(all);
+//			LoginTemplate login = om.readValue("{ .. }", LoginTemplate.class);
+			
+			PrintWriter out = res.getWriter();
+			out.println(json);
 		}
-	
-		
-		String json = om.writeValueAsString(all);
-//		LoginTemplate login = om.readValue("{ .. }", LoginTemplate.class);
-		
-		PrintWriter out = res.getWriter();
-		out.println(json);
 	}
-}

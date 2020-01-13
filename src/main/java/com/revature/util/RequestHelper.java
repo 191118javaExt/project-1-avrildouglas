@@ -16,7 +16,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.Employee;
 import com.revature.models.EmployeeDTO;
 import com.revature.models.LoginTemplate;
+import com.revature.models.Reimburse;
+import com.revature.models.ReimburseDTO;
 import com.revature.services.EmployeeService;
+import com.revature.services.ReimburseService;
 
 public class RequestHelper {
 	
@@ -50,7 +53,7 @@ public class RequestHelper {
 			PrintWriter out = res.getWriter();
 			res.setContentType("application/json");
 			EmployeeDTO eDTO = EmployeeService.convertToDTO(e);
-			
+	
 			out.println(om.writeValueAsString(eDTO));
 			
 			logger.info(user_name + " has successfully logged in");
@@ -93,4 +96,30 @@ public class RequestHelper {
 		PrintWriter out = res.getWriter();
 		out.println(json);
 	}
+	
+	public static void processReimburse(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		res.setContentType("application/json");
+		List<Reimburse> all = ReimburseService.findAll();
+		List<ReimburseDTO> allDTO = new ArrayList<>();
+		
+		for(Reimburse r : all) {
+			allDTO.add(new ReimburseDTO(
+					r.getReim_id(),
+					r.getSubmit_by(),
+					r.getReim_amt(),
+					r.getReim_type(),
+					r.getReim_descr(),
+					r.getSubmit_dte(),
+					r.getReim_recpt(),
+					r.getProcess_by(),
+					r.getProcess_dte(),
+					r.getReim_stat(),
+					r.getUser_name()));
+		}
+		String json = om.writeValueAsString(all);
+		
+		PrintWriter out = res.getWriter();
+		out.println(json);
+	}
+	
 }

@@ -2,7 +2,7 @@ package com.revature.models;
 
 import java.util.Date;
 
-public class Reimburse {
+public class ReimburseDTO {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -17,11 +17,13 @@ public class Reimburse {
 	private Date process_dte;
 	private String process_by;
 	private String user_name;
-	public Reimburse() {
+	
+	public ReimburseDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Reimburse(int reim_id, String submit_by, Double reim_amt, String reim_type, String reim_descr,
+
+	public ReimburseDTO(int reim_id, String submit_by, Double reim_amt, String reim_type, String reim_descr,
 			Date submit_dte, String reim_recpt, String reim_stat, Date process_dte, String process_by,
 			String user_name) {
 		super();
@@ -37,72 +39,95 @@ public class Reimburse {
 		this.process_by = process_by;
 		this.user_name = user_name;
 	}
+
 	public int getReim_id() {
 		return reim_id;
 	}
+
 	public void setReim_id(int reim_id) {
 		this.reim_id = reim_id;
 	}
+
 	public String getSubmit_by() {
 		return submit_by;
 	}
+
 	public void setSubmit_by(String submit_by) {
 		this.submit_by = submit_by;
 	}
+
 	public Double getReim_amt() {
 		return reim_amt;
 	}
+
 	public void setReim_amt(Double reim_amt) {
 		this.reim_amt = reim_amt;
 	}
+
 	public String getReim_type() {
 		return reim_type;
 	}
+
 	public void setReim_type(String reim_type) {
 		this.reim_type = reim_type;
 	}
+
 	public String getReim_descr() {
 		return reim_descr;
 	}
+
 	public void setReim_descr(String reim_descr) {
 		this.reim_descr = reim_descr;
 	}
+
 	public Date getSubmit_dte() {
 		return submit_dte;
 	}
+
 	public void setSubmit_dte(Date submit_dte) {
 		this.submit_dte = submit_dte;
 	}
+
 	public String getReim_recpt() {
 		return reim_recpt;
 	}
+
 	public void setReim_recpt(String reim_recpt) {
 		this.reim_recpt = reim_recpt;
 	}
+
 	public String getReim_stat() {
 		return reim_stat;
 	}
+
 	public void setReim_stat(String reim_stat) {
 		this.reim_stat = reim_stat;
 	}
+
 	public Date getProcess_dte() {
 		return process_dte;
 	}
+
 	public void setProcess_dte(Date process_dte) {
 		this.process_dte = process_dte;
 	}
+
 	public String getProcess_by() {
 		return process_by;
 	}
+
 	public void setProcess_by(String process_by) {
 		this.process_by = process_by;
 	}
+
 	public String getUser_name() {
 		return user_name;
 	}
+
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -120,6 +145,7 @@ public class Reimburse {
 		result = prime * result + ((user_name == null) ? 0 : user_name.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -128,7 +154,7 @@ public class Reimburse {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Reimburse other = (Reimburse) obj;
+		ReimburseDTO other = (ReimburseDTO) obj;
 		if (process_by == null) {
 			if (other.process_by != null)
 				return false;
@@ -183,13 +209,17 @@ public class Reimburse {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
-		return "Reimburse [reim_id=" + reim_id + ", submit_by=" + submit_by + ", reim_amt=" + reim_amt + ", reim_type="
-				+ reim_type + ", reim_descr=" + reim_descr + ", submit_dte=" + submit_dte + ", reim_recpt=" + reim_recpt
-				+ ", reim_stat=" + reim_stat + ", process_dte=" + process_dte + ", process_by=" + process_by
-				+ ", user_name=" + user_name + "]";
+		return "ReimburseDTO [reim_id=" + reim_id + ", submit_by=" + submit_by + ", reim_amt=" + reim_amt
+				+ ", reim_type=" + reim_type + ", reim_descr=" + reim_descr + ", submit_dte=" + submit_dte
+				+ ", reim_recpt=" + reim_recpt + ", reim_stat=" + reim_stat + ", process_dte=" + process_dte
+				+ ", process_by=" + process_by + ", user_name=" + user_name + "]";
 	}
-	
 
+	
+	
 }
+
+	

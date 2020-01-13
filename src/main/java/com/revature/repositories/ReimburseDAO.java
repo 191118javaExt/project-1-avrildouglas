@@ -3,6 +3,7 @@ package com.revature.repositories;
 import java.util.List;
 
 import com.revature.models.Reimburse;
+import com.revature.models.ReimburseTemplate;
 
 public interface ReimburseDAO {
 	
