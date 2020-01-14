@@ -16,7 +16,7 @@
 </head>
 	<body>
 		<h1 align="center">Employee Reimbursement Request Form</h1>
-<form name="reimburseForm" onSubmit="sendReimburse(event.preventDefault())">			
+<form name="reimburseForm" id="reimburseForm" onSubmit="sendReimburse(event.preventDefault())">			
 <!--  form target="uploadfiles.php" method="post" enctype="multipart/form-data">-->
  
  <div class="form-row"> 
@@ -97,7 +97,7 @@
   <br>
    			<button type="submit" class="btn btn-primary">SUBMIT REIMBURSEMENT</button>
    <br>
-   			<button type="submit" class="btn btn-primary">MAIN MENU</button>
+   			<button onclick=mainmenu.html type="submit" class="btn btn-primary">MAIN MENU</button>
   </div>
 
 </form>

@@ -41,9 +41,6 @@ function sendReimburse(){
 			}
 				alert("Failed to submit! Resubmit Reimbursement Form.");
 			}};
-	xhr.open("POST", "http://localhost:8080/project-1/reimburse");
+	xhr.open("POST", "http://localhost:8080/project-1/reimburse.main");
 	xhr.send(JSON.stringify(reimburseTemplate));
-
-	
-	
 	

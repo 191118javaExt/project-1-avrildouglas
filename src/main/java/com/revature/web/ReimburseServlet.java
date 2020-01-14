@@ -44,6 +44,12 @@ public class ReimburseServlet extends HttpServlet {
 		String json = om.writeValueAsString(all);
 		ReimburseTemplate reimburse = om.readValue("{ .. }", ReimburseTemplate.class);
 		
+		
+		String submitby = req.getParameter("submit_by");
+		String reimamt = req.getParameter("reim_amt");
+		String reimtype = reimburse.getReim_type();
+	
+		
 		PrintWriter out = res.getWriter();
 		out.println(json);
 	}

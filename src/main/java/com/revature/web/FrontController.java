@@ -21,8 +21,6 @@ public class FrontController extends HttpServlet {
 		
 		switch(URI) {
 		case "login.main":
-			//res.setContentType("text/html;charset=UTF-8");
-			//PrintWriter out = res.getWriter();
 			RequestHelper.processLogin(req, res);
 			break;
 		case "logout.main":

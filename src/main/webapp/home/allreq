@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title></title>
+
+<script>
+
+CONST myform = document.getElementByID('allreq');
+
+allreq.addEventListener('submit', function
+
+</script>
+</head>
+<body>
+
+
+
+
+
+
+</body>
+
+
+
+
+
+</html>

@@ -101,7 +101,6 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			// Gets the current session, or creates one if it did not exist
 			session.setAttribute("user_name", user_name);
-			session.setAttribute("user_id", user_name);
 			RequestDispatcher rd = req.getRequestDispatcher("./home/mainmenu.html");
 			//RequestDispatcher rd = req.getRequestDispatcher("./index.html");
 			rd.forward(req, res);
